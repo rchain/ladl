@@ -276,10 +276,8 @@ $$\mathsf{G}[X_1,V_1] \cdot  \mathsf{G}[X_2,V_2] = \mathsf{G}[X_1 + V_1,X_2 + V_
 
 Note that the crossover style operations like "$\cdot$" together with reflection allow us to define *evolutionary* processes (in the sense of Holland) for graphs and graph domains. The principal missing ingredient is a fitness function for evaluating graphs and graph domains for selection and "reproduction."
 
-[This is a reference test][Holland]
-
 # Bibliography
-[Holland]: Adaptation in Natural and Artificial Systems
+Adaptation in Natural and Artificial Systems
 J. Holland. University of Michigan Press, Ann Arbor, MI, (1975)second edition, 1992.
 
 Algebraic Graph Theory
@@ -305,3 +303,6 @@ Luca Cardelli, Philippa Gardner, Giorgio Ghelli
 
 
 > Written with [StackEdit](https://stackedit.io/).
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTQ3ODcyMzI5XX0=
+-->
