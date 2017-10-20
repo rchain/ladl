@@ -1,4 +1,7 @@
+[TOC]
+
 # Notes on a theory of graphs
+
 We describe an algebraic theory of graphs, $\mathsf{G}[X,V]$. The theory is dependent on a theory of variables, $X$, and a theory of vertices, $V$. Each theory is required to provide an effective procedure for deciding membership. More specifically, given any $u$ we can decide $u \in X$ (and $u \in V$, respectively). Likewise, both dependencies must come with an effective notion of equality. That is, for variables $x_1$ and $x_2$ there is an effective procedure for deciding whether $x_1 = x_2$, and likewise for vertices.  We refer to the graphs captured by the theory as the domain of graphs of $\mathsf{G}[X,V]$. The theory is unique in that it explicitly includes a notion of a reference to a vertex and only admits edges between references. Indeed, variables supply the references. We write
 
 $$\mathsf{G}[X,V];\Gamma \vdash g$$
@@ -19,7 +22,10 @@ Such an algebraic characterization of linked lists is typically used in algorith
 
 An excellent example is the popular tool GraphViz and its dotty language. Using dotty to specify the complete graph of 100 nodes is an enormous task. The recursive data type resulting from the theory of graphs presented here results in a single line specification of the complete graph. More generally, in the examples we present we see an exponential jump in complexity in the types of graphs being characterized and yet the algorithmic characterizations remain typical 1-line recursive specifications.
 
-The other motivation is foundational We seek a minimal characterization of subtypes of of the type of graphs.
+The other motivation is foundational. We seek a minimal characterization of subtypes of of the type of graphs. As will become clear, $\mathsf{G}[X,V]$ represents the type of graphs. We can pick out subtypes of this type by two well established methodologies. One is to probe the type with structure preserving functions from a domain, such as the naturals $\mathsf{Nat}$ or $\mathcal{P}A$, the power set of a set $A$, into $\mathsf{G}[X,V]$. The other is to lift the graph constructors point-wise through a collection type. Here we find the minimal domain in which these two notions of subtype coincide.
+
+### Related work
+This work is inspired by two different threads. One is the seminal work of Cardelli, Gardner, and Ghelli. There is a natural way to encode graphs in process calculi, such as the $\pi$-calculus. This turns the spatial logics of Caires and Cardelli into a graph query language. A formula queries for the graphs that satisfy it. The other thread is the seminal work of Bill Lawvere and many others relating monads to algebraic theories. 
 
 ## Well-formedness
 This is an algebraic theory, and thus it is syntactic in nature. It provides a language of graphs that are built out of logical sentences. In more detail, the theory admits three kinds of sentences: 
@@ -104,17 +110,17 @@ As a matter of convenience we write $\mathsf{G}[X,V] \vdash v \not\in g$ to mean
 ## Equations
 The syntactic theory is too fine grained. It makes syntactic distinctions that do not correspond to distinct graphs.  Juxtaposition is a great example. It corresponds to the disjoint sum of two graphs and as such the order of juxtaposition should not matter. We erase these syntactic distinctions with a set of equations on the graph expressions.
 
-$$\frac{ }{ \mathsf{G}[X,V] \vdash 0 \otimes g = g}Identity$$
+$$\frac{ }{ \mathsf{G}[X,V] \vdash 0 \otimes g \equiv g}Identity$$
 
-$$\frac{ }{ \mathsf{G}[X,V] \vdash g_1 \otimes g_2 = g_2 \otimes g_1}Symmetry$$
+$$\frac{ }{ \mathsf{G}[X,V] \vdash g_1 \otimes g_2 \equiv g_2 \otimes g_1}Symmetry$$
 
-$$\frac{ }{ \mathsf{G}[X,V] \vdash g_1 \otimes ( g_2 \otimes g_3 ) = ( g_1 \otimes g_2) \otimes g_3}Associativity$$
+$$\frac{ }{ \mathsf{G}[X,V] \vdash g_1 \otimes ( g_2 \otimes g_3 ) \equiv ( g_1 \otimes g_2) \otimes g_3}Associativity$$
 
-$$\frac{ }{ \mathsf{G}[X,V] \vdash v_1|\ldots|v_i|v_j|g = v_1|\ldots|v_j|v_i|g}Permutation$$
+$$\frac{ }{ \mathsf{G}[X,V] \vdash v_1|\ldots|v_i|v_j|g \equiv v_1|\ldots|v_j|v_i|g}Permutation$$
 
-$$\frac{ }{ \mathsf{G}[X,V] \vdash \mathsf{let}\; x = v \; \mathsf{in}\; \mathsf{let}\; x' = v \; \mathsf{in}\; g = \mathsf{let}\; x = v \; \mathsf{in}\; g}Conservation$$
+$$\frac{ }{ \mathsf{G}[X,V] \vdash \mathsf{let}\; x = v \; \mathsf{in}\; \mathsf{let}\; x' = v \; \mathsf{in}\; g \equiv \mathsf{let}\; x = v \; \mathsf{in}\; g}Conservation$$
 
-$$\frac{ \mathsf{G}[X,V] \vdash x \notin g_2}{ \mathsf{G}[X,V] \vdash (\mathsf{let}\; x = v \; \mathsf{in}\; g_1) \otimes g_2 = \mathsf{let}\; x = v \; \mathsf{in}\; ( g_1 \otimes g_2)}Extrusion$$
+$$\frac{ \mathsf{G}[X,V] \vdash x \notin g_2}{ \mathsf{G}[X,V] \vdash (\mathsf{let}\; x = v \; \mathsf{in}\; g_1) \otimes g_2 \equiv \mathsf{let}\; x = v \; \mathsf{in}\; ( g_1 \otimes g_2)}Extrusion$$
 
 Note the mutual dependency amongst $Extrusion$ and $Permutation$ and the extended $\in$ relation.
 
@@ -276,8 +282,10 @@ $$\mathsf{G}[X_1,V_1] \cdot  \mathsf{G}[X_2,V_2] = \mathsf{G}[X_1 + V_1,X_2 + V_
 
 Note that the crossover style operations like "$\cdot$" together with reflection allow us to define *evolutionary* processes (in the sense of Holland) for graphs and graph domains. The principal missing ingredient is a fitness function for evaluating graphs and graph domains for selection and "reproduction."
 
+[This is a reference test][Holland]
+
 # Bibliography
-Adaptation in Natural and Artificial Systems
+[Holland]: Adaptation in Natural and Artificial Systems
 J. Holland. University of Michigan Press, Ann Arbor, MI, (1975)second edition, 1992.
 
 Algebraic Graph Theory
@@ -303,6 +311,3 @@ Luca Cardelli, Philippa Gardner, Giorgio Ghelli
 
 
 > Written with [StackEdit](https://stackedit.io/).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3ODcyMzI5XX0=
--->
